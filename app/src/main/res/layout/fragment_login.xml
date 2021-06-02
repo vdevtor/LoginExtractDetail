@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.login.LoginFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/ivMainCover"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_250sdp"
+            android:background="@drawable/image_login_cover"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Shopfy"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_25ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/ivMainCover"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_16sdp"
+            android:background="@drawable/edit_text_layout_login"
+            android:hint="@string/hint_login"
+            app:boxBackgroundMode="none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivMainCover">
+
+            <EditText
+                android:id="@+id/etLogin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp"
+                android:padding="@dimen/_5sdp" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPassWord"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_16sdp"
+            android:background="@drawable/edit_text_layout_login"
+            android:hint="Password"
+            app:boxBackgroundMode="none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tilLogin">
+
+            <EditText
+                android:id="@+id/etPassWord"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp"
+                android:padding="@dimen/_5sdp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_16sdp"
+            android:background="@drawable/button_bg"
+            android:text="@string/btn_text_entrar"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tilPassWord" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
