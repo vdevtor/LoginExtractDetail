@@ -54,8 +54,7 @@ dependencies {
     def intuit_version = "1.0.6"
 
 
-    //Lifecycle Components
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     // LiveData
@@ -68,8 +67,12 @@ dependencies {
     //Scalable size unit
     implementation "com.intuit.sdp:sdp-android:$intuit_version"
     implementation "com.intuit.ssp:ssp-android:$intuit_version"
-    //Koin - Dependency
-    implementation 'org.koin:koin-androidx-viewmodel:2.1.5'
+
+    //Koin
+    def koin_version = '2.1.0'
+    implementation "org.koin:koin-android:$koin_version"
+    implementation "org.koin:koin-androidx-scope:$koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
 
     //Retrofit
     def retrofit = '2.9.0'
