@@ -1,4 +1,5 @@
 <resources>
+
     <!--Login-->
     <string name="app_name">LoginExtractDetail</string>
     <string name="hint_login">Login</string>
@@ -9,4 +10,12 @@
     <string name="password">Password</string>
     <string name="shopfy">Shopfy</string>
     <string name="_description_bg">backgroundGradient</string>
+
+
+    <!--Home-->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="disponivel">Disponivel</string>
+    <string name="limite">limite:</string>
+    <string name="utilizado">utilizado:</string>
+    <string name="extrato_de_compras">Extrato de Compras</string>
 </resources>

@@ -6,7 +6,7 @@ import com.example.loginextractdetail.data.response.ResponseTreatment
 import org.koin.core.KoinComponent
 import org.koin.core.get
 
-open class LoginRepository(var responseTreatment: ResponseTreatment): BaseRepository, KoinComponent {
+open class RepositoryImplement(var responseTreatment: ResponseTreatment): BaseRepository, KoinComponent {
 
     init {
         responseTreatment = get<ResponseTreatment>()

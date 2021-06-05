@@ -6,9 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.loginextractdetail.R
 import com.example.loginextractdetail.base.BaseRepository
-import com.example.loginextractdetail.data.model.User
+import com.example.loginextractdetail.data.model.userauth.User
 import com.example.loginextractdetail.data.response.GetResponseApi
-import com.example.loginextractdetail.utils.Constants.ACCESS_DENIED
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 
@@ -31,25 +30,19 @@ class LoginViewModel(val repository: BaseRepository) : ViewModel(), KoinComponen
         get() = _authenticationStateEvent
 
 
-    fun authenticateToken(token: String?, username: String): String? {
+    fun authenticateToken(token: String?) {
         this.token.value = token
-        this.userLogin = username
-        _authenticationStateEvent.value = AuthenticationState.Authenticated
-
-        if (this.token.value == ACCESS_DENIED) {
-            _authenticationStateEvent.value = AuthenticationState.UnAuthenticated
+        if (this.token.value.isNullOrEmpty()) {
+            _authenticationStateEvent.postValue(AuthenticationState.UnAuthenticated)
+        } else {
+            _authenticationStateEvent.value = AuthenticationState.Authenticated
         }
-
-        return this.token.value
     }
 
-    fun authentication(username: String, password: String) {
-        if (isValidForm(username, password)) {
-            this.userLogin = username
-            this.userPassword = password
-            _authenticationStateEvent.value = AuthenticationState.Authenticated
-            authenticateRequestApi(userLogin, userPassword)
-        }
+    private fun authentication(username: String, password: String) {
+        this.userLogin = username
+        this.userPassword = password
+        _authenticationStateEvent.postValue(AuthenticationState.Authenticated)
     }
 
     private fun isValidForm(userlogin: String, password: String): Boolean {
@@ -70,17 +63,26 @@ class LoginViewModel(val repository: BaseRepository) : ViewModel(), KoinComponen
         return true
     }
 
-    private fun authenticateRequestApi(user: String, password: String) {
+    fun authenticateRequestApi(user: String, password: String) {
         viewModelScope.launch {
             when (val response = repository.authenticateUser(user, password)) {
                 is GetResponseApi.ResponseSuccess -> {
                     onResultLogin.postValue(response.data as User)
+                    if (isValidForm(user, password)) {
+                        _authenticationStateEvent.postValue(AuthenticationState.Authenticated)
+                        authentication(user, password)
+                    }
                 }
                 is GetResponseApi.ResponseError -> {
                     onResultLoginError.postValue(response.message)
                 }
             }
         }
+    }
+
+    fun refuseAuthentication() {
+        _authenticationStateEvent.value = AuthenticationState.UnAuthenticated
+        this.token.postValue("")
     }
 
     companion object {

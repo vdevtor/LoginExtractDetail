@@ -6,15 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
-import com.example.loginextractdetail.R
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.loginextractdetail.databinding.FragmentLoginBinding
+import com.example.loginextractdetail.extensions.dialogBuilderLogin
 import com.example.loginextractdetail.extensions.disMissError
-import com.example.loginextractdetail.extensions.displayToast
-import com.example.loginextractdetail.utils.Constants.ACCESS_DENIED
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
+import kotlin.concurrent.schedule
 
 class LoginFragment : Fragment() {
+    private var token: String? = null
     private var binding: FragmentLoginBinding? = null
     private val loginViewModel: LoginViewModel by viewModel()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -37,11 +43,24 @@ class LoginFragment : Fragment() {
         binding?.btnLogin?.setOnClickListener {
             val login = binding?.etLogin?.text.toString()
             val password = binding?.etPassWord?.text.toString()
-            loginViewModel.authentication(login, password)
-            setObservables()
+            loginViewModel.authenticateRequestApi(login, password)
+            checkAuthenticationState()
+            Timer().schedule(2000) {
+
+                lifecycleScope.launch {
+                    withContext(Dispatchers.Main) {
+                        setObservables()
+                        if (checkToken()) {
+                            goToHome()
+                        } else {
+                            dialogBuilderLogin(context)
+                        }
+                    }
+                }
+
+            }
         }
     }
-
 
     private fun textViewChangeListeners() {
 
@@ -53,23 +72,10 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun setObservables() {
+    private fun checkAuthenticationState() {
         loginViewModel.authenticationStateEvent.observe(viewLifecycleOwner, { authenticationState ->
             when (authenticationState) {
-                is LoginViewModel.AuthenticationState.Authenticated -> {
-                    loginViewModel.onResultLogin.observe(viewLifecycleOwner, { user ->
-                        loginViewModel.authenticateToken(user.data?.token ?: getString(
-                                R.string.login_denied_access),
-                                loginViewModel.userLogin)
-                        loginViewModel.token.observe(viewLifecycleOwner, { token ->
-                            displayToast(token, this.context)
 
-                        })
-
-
-                    })
-
-                }
                 is LoginViewModel.AuthenticationState.InvalidAuthentication -> {
                     val validationFields: Map<String, TextInputLayout?> = initValidationFields()
                     authenticationState.fields.forEach { fieldsError ->
@@ -81,16 +87,27 @@ class LoginFragment : Fragment() {
                 }
                 else -> return@observe
             }
+        })
 
+    }
+
+    private fun setObservables() {
+        loginViewModel.onResultLogin.observe(viewLifecycleOwner, {
+            loginViewModel.authenticateToken(it.data?.token)
         })
     }
 
-    private fun checkToken() {
-        val token = loginViewModel.token.value
-        if (token != null && token != ACCESS_DENIED) {
-            displayToast(token, this.context)
-        }
+    private fun checkToken(): Boolean {
+        token = loginViewModel.token.value
+        return token?.isNotEmpty() ?: false
     }
+
+    private fun goToHome() {
+        val directions = LoginFragmentDirections.actionLoginFragmentToHomeFragment(token
+                ?: "Null")
+        findNavController().navigate(directions)
+    }
+
 
     private fun initValidationFields() = mapOf(
             LoginViewModel.INPUT_USERNAME.first to binding?.tilLogin,
