@@ -16,5 +16,9 @@ open class RepositoryImplement(var responseTreatment: ResponseTreatment): BaseRe
         return responseTreatment.authenticateUser(user,password)
     }
 
+    override suspend fun getUserDetails(token: String): GetResponseApi {
+        return responseTreatment.getUserDetails(token)
+    }
+
 
 }

@@ -1,7 +1,7 @@
 package com.example.loginextractdetail.data.model.userextract
 
 data class BillStatus(
-    val code: Int,
-    val `data`: Data,
-    val status: String
+        val code: Int,
+        var `data`: UserDataInfo,
+        val status: String
 )

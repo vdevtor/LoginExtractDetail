@@ -10,6 +10,7 @@
     <string name="password">Password</string>
     <string name="shopfy">Shopfy</string>
     <string name="_description_bg">backgroundGradient</string>
+    <string name="login_fragment_label">Login</string>
 
 
     <!--Home-->
@@ -18,4 +19,7 @@
     <string name="limite">limite:</string>
     <string name="utilizado">utilizado:</string>
     <string name="extrato_de_compras">Extrato de Compras</string>
+    <string name="home_fragment_label">Bem Vindo Sr(a)</string>
+    <string name="atrasada">Atrasada</string>
+    <string name="apple_store">Apple Store</string>
 </resources>

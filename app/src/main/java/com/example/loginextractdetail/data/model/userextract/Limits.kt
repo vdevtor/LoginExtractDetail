@@ -1,8 +1,11 @@
 package com.example.loginextractdetail.data.model.userextract
 
+import com.google.gson.annotations.SerializedName
+
 data class Limits(
     val available: String,
     val expent: String,
     val total: String,
-    val total_due: String
+    @SerializedName("total_due")
+    val totalDue: String
 )

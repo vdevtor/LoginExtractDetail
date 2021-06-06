@@ -7,7 +7,10 @@
     android:orientation="vertical"
     android:background="@drawable/image_login_cover"
     tools:context=".ui.home.HomeFragment">
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="@android:color/darker_gray"/>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -119,7 +122,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/item_bought"/>
 
     </ScrollView>
 
