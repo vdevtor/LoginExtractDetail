@@ -69,14 +69,15 @@ class HomeFragment : Fragment(), ClickContract {
         })
     }
 
-    private fun setupRecycler(installment: List<Installment>){
+    private fun setupRecycler(installment: List<Installment>) {
         binding?.recyclerView?.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = HomeAdapter(installment,this@HomeFragment)
+            adapter = HomeAdapter(installment, this@HomeFragment)
         }
     }
 
     override fun onClick(result: Installment) {
-
+        val directions = HomeFragmentDirections.actionHomeFragmentToDetailFragment(result)
+        findNavController().navigate(directions)
     }
 }

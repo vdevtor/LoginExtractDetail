@@ -22,4 +22,10 @@
     <string name="home_fragment_label">Bem Vindo Sr(a)</string>
     <string name="atrasada">Atrasada</string>
     <string name="apple_store">Apple Store</string>
+    <string name="parcela">Parcela</string>
+    <string name="total">Total</string>
+
+    <!--Detail-->
+    <string name="dias_atrasados">1%s dias atrasados</string>
+    <string name="detail_fragment_label">Detalhes</string>
 </resources>

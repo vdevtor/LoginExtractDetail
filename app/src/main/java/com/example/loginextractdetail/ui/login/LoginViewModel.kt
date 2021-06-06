@@ -88,6 +88,5 @@ class LoginViewModel(val repository: BaseRepository) : ViewModel(), KoinComponen
     companion object {
         val INPUT_USERNAME = "INPUT_USERNAME" to R.string.login_input_layout_error_invalid_username
         val INPUT_PASSWORD = "INPUT_PASSWORD" to R.string.login_input_layout_error_invalid_password
-
     }
 }

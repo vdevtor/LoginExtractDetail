@@ -3,7 +3,7 @@ package com.example.loginextractdetail.ui.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import com.example.loginextractdetail.GlideApp
 import com.example.loginextractdetail.R
 import com.example.loginextractdetail.data.model.userextract.Installment
 import com.example.loginextractdetail.databinding.ItemBoughtBinding
@@ -34,7 +34,7 @@ class HomeAdapter(
                 }
 
                 binding.tvItemTitle.text = detail.store ?: "Loja Indisponivel"
-                binding.tvItemDescription.text = detail.description
+                binding.tvItemDescription.text = detail.name
                         ?: "Descrição do item temporariamente indisponivel"
                 binding.tvParcela.text = installment
 
@@ -53,7 +53,7 @@ class HomeAdapter(
                     binding.ivItem.load(url2)
                 } else if (url1 == "https://icoded.com.br/api/images/" && url2 == "https://icoded.com.br/api/images/") {
 
-                    Glide.with(itemView.context).load(R.drawable.ic_launcher_background).into(binding.ivItem)
+                    GlideApp.with(itemView.context).load(R.drawable.ic_launcher_background).into(binding.ivItem)
                 }
             }
         }

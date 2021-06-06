@@ -8,7 +8,7 @@ import org.koin.core.get
 class ResponseTreatment(private var responseCall: ResponseCall) : KoinComponent {
 
     init {
-        responseCall = get<ResponseCall>()
+        responseCall = get()
     }
 
     suspend fun authenticateUser(user: String, password: String): GetResponseApi {

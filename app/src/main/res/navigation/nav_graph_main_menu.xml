@@ -23,5 +23,20 @@
         <argument android:name="token"
             app:argType="string"
             app:nullable="false"/>
+        <action
+            android:id="@+id/action_homeFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.loginextractdetail.ui.detail.DetailFragment"
+        android:label="@string/detail_fragment_label"
+        tools:layout="@layout/fragment_detail">
+
+        <argument
+            android:name="installment"
+            app:nullable="false"
+            app:argType="com.example.loginextractdetail.data.model.userextract.Installment"/>
+
     </fragment>
 </navigation>

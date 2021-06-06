@@ -108,7 +108,6 @@ class LoginFragment : Fragment() {
         findNavController().navigate(directions)
     }
 
-
     private fun initValidationFields() = mapOf(
             LoginViewModel.INPUT_USERNAME.first to binding?.tilLogin,
             LoginViewModel.INPUT_PASSWORD.first to binding?.tilPassWord

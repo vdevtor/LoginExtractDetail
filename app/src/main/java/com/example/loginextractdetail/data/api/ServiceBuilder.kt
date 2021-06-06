@@ -39,8 +39,7 @@ class ServiceBuilder {
                             .addHeader(BASE_PWD_NAME, BASE_PWD_VALUE)
                             .build()
                     chain.proceed(newRequest)
-                }.addInterceptor {
-                    chain ->
+                }.addInterceptor { chain ->
                     val url = chain
                             .request()
                             .url

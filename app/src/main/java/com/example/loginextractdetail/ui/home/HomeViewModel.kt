@@ -9,26 +9,26 @@ import com.example.loginextractdetail.data.response.GetResponseApi
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 
-class HomeViewModel(val repository: BaseRepository) :BaseViewModel(),KoinComponent {
+class HomeViewModel(val repository: BaseRepository) : BaseViewModel(), KoinComponent {
 
     val onResultUserDetails = MutableLiveData<BillStatus>()
-    val onResultError = MutableLiveData<String>()
+    private val onResultError = MutableLiveData<String>()
 
 
-    fun getDetails(token: String){
+    fun getDetails(token: String) {
         getUserDetailsFromApi(token)
     }
 
-   private fun getUserDetailsFromApi(token:String){
-       viewModelScope.launch {
-           when(val response = repository.getUserDetails(token)){
-               is GetResponseApi.ResponseSuccess ->{
-                   onResultUserDetails.postValue(response.data as BillStatus)
-               }
-               is GetResponseApi.ResponseError ->{
-                   onResultError.postValue(response.message)
-               }
-           }
-       }
+    private fun getUserDetailsFromApi(token: String) {
+        viewModelScope.launch {
+            when (val response = repository.getUserDetails(token)) {
+                is GetResponseApi.ResponseSuccess -> {
+                    onResultUserDetails.postValue(response.data as BillStatus)
+                }
+                is GetResponseApi.ResponseError -> {
+                    onResultError.postValue(response.message)
+                }
+            }
+        }
     }
 }

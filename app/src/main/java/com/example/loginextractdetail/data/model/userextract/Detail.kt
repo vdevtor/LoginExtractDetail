@@ -1,5 +1,9 @@
 package com.example.loginextractdetail.data.model.userextract
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Detail(
     val description: String?,
     var images: List<String>?,
@@ -10,4 +14,4 @@ data class Detail(
     val store: String?,
     val total_value: String,
     val value_diff: String
-)
+):Parcelable

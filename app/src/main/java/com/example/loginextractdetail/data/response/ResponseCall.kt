@@ -3,7 +3,7 @@ package com.example.loginextractdetail.data.response
 import com.example.loginextractdetail.base.BaseResponse
 import com.example.loginextractdetail.data.api.Service
 
-class ResponseCall() : BaseResponse() {
+class ResponseCall : BaseResponse() {
 
     suspend fun responseAuthenticateLogin(user: String, password: String): GetResponseApi {
         val response = authenticateUser(user, password)
